@@ -35,13 +35,16 @@ void UserNumber(unsigned int mysteryNumber, GameState& gameState) {
 	std::cout << "Choisissez un nombre entre 0 et 100 pour deviner le nombre myst\x8Are \n";
 	std::cin >> userChoice;
 
-	if (userChoice == mysteryNumber)
+	if (userChoice == mysteryNumber) {
 
 		std::cout << "Vous avez gagn\x82! \n";
 
+		gameState = GameState::END;
+	}
+
 	else if (userChoice < mysteryNumber) {
 
-		gameState = GameState::END;
+		gameState = GameState::PLAY;
 
 		std::cout << "Plus grand ! Recommencez! \n";
 
