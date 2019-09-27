@@ -9,10 +9,6 @@ Toutes ses modifications doivent être faite sur une nouvelle branche créé à part
 Vous faites un commit pour chaque fonction complétée. Une fois l’exercices terminé vous devez merge les modifications de votre branch sur develop.
 */
 
-
-
-
-
 enum class GameState {
 	INIT,
 	PLAY,
@@ -28,7 +24,39 @@ void GenerateMysteryNumber(unsigned int& mystery) {
 	
 	mystery = (rand() % MAX_NUMBER);
 
+	std::cout << "le nombre mystere choisit est: " << mystery << "\n";
+
 }
+
+void UserNumber(unsigned int mysteryNumber, GameState& gameState) {
+
+	int userChoice = 0;
+
+	std::cout << "Choisissez un nombre entre 0 et 100 pour deviner le nombre myst\x8Are \n";
+	std::cin >> userChoice;
+
+	if (userChoice == mysteryNumber)
+
+		std::cout << "Vous avez gagn\x82! \n";
+
+	else if (userChoice < mysteryNumber) {
+
+		gameState = GameState::END;
+
+		std::cout << "Plus grand ! Recommencez! \n";
+
+	}
+
+	else if (userChoice > mysteryNumber) {
+
+		gameState = GameState::PLAY;
+
+		std::cout << "Plus petit! Recommencez! \n";
+
+	}
+
+}
+
 
 int main() {
 
@@ -36,9 +64,7 @@ int main() {
 
 	unsigned int mysteryNumber;
 
-	while (gameState != GameState::EXIT);
-	{
-
+	do {
 
 		switch (gameState) {
 		case GameState::INIT:
@@ -47,7 +73,7 @@ int main() {
 			GenerateMysteryNumber(mysteryNumber);
 			gameState = GameState::PLAY;
 
-			//std::cout << "le nombre mystere choisit est: " << mysteryNumber;
+			
 			break;
 
 		case GameState::PLAY:
@@ -56,20 +82,28 @@ int main() {
 				- essayer de deviner le nombre mystère à l'aide d'une function
 				- Si le nombre mystère est trouvé il faut passer à l'état END
 			*/
+			UserNumber(mysteryNumber, gameState);
+			gameState = GameState::END;
+
 			break;
 
 		case GameState::END:
 			/*
 				Cette partie doit afficher le nombre de coups qui ont été nécessaire pour trouver le nombre mystère et indiquer quel est ce nombre mystère
 			*/
+
+
+
+
 			break;
 
 		case GameState::EXIT:
 			break;
 		}
-		
-	}
+	} 
 	
-system("pause");
+	while (gameState != GameState::EXIT);
+	
+system ("pause");
 return EXIT_SUCCESS;
 }
