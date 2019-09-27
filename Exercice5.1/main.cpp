@@ -24,7 +24,7 @@ void GenerateMysteryNumber(unsigned int& mystery) {
 	
 	mystery = (rand() % MAX_NUMBER);
 
-	std::cout << "le nombre mystere choisit est: " << mystery << "\n";
+	
 
 }
 
@@ -46,7 +46,7 @@ void UserNumber(unsigned int mysteryNumber, GameState& gameState) {
 
 		gameState = GameState::PLAY;
 
-		std::cout << "Plus grand ! Recommencez! \n";
+		std::cout << "Le nombre myst\x8Are est plus grand ! Recommencez! \n";
 
 	}
 
@@ -54,7 +54,7 @@ void UserNumber(unsigned int mysteryNumber, GameState& gameState) {
 
 		gameState = GameState::PLAY;
 
-		std::cout << "Plus petit! Recommencez! \n";
+		std::cout << "Le nombre myst\x8Are est plus petit! Recommencez! \n";
 
 	}
 
@@ -63,11 +63,13 @@ void UserNumber(unsigned int mysteryNumber, GameState& gameState) {
 
 int main() {
 
+	int compteurTours = 0;
+
 	GameState gameState = GameState::INIT;
 
 	unsigned int mysteryNumber;
 
-	do {
+	while (gameState != GameState::EXIT) {
 
 		switch (gameState) {
 		case GameState::INIT:
@@ -86,7 +88,7 @@ int main() {
 				- Si le nombre mystère est trouvé il faut passer à l'état END
 			*/
 			UserNumber(mysteryNumber, gameState);
-			gameState = GameState::END;
+			compteurTours++;
 
 			break;
 
@@ -95,17 +97,17 @@ int main() {
 				Cette partie doit afficher le nombre de coups qui ont été nécessaire pour trouver le nombre mystère et indiquer quel est ce nombre mystère
 			*/
 
+			std::cout << "Le nombre de tours est de: " << compteurTours << "\n";
 
+			std::cout << "le nombre mystere est choisit est: " << mysteryNumber << "\n";
 
+			gameState = GameState::EXIT;
 
-			break;
-
-		case GameState::EXIT:
 			break;
 		}
 	} 
 	
-	while (gameState != GameState::EXIT);
+	
 	
 system ("pause");
 return EXIT_SUCCESS;
